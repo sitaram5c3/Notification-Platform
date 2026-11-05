@@ -1,1 +1,10 @@
-<Solution />
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="prompt.txt" />
+  </Folder>
+  <Project Path="NotificationPlatform.API/NotificationPlatform.API.csproj" />
+  <Project Path="NotificationPlatform.Application/NotificationPlatform.Application.csproj" />
+  <Project Path="NotificationPlatform.Domain/NotificationPlatform.Domain.csproj" />
+  <Project Path="NotificationPlatform.Infrastructure/NotificationPlatform.Infrastructure.csproj" />
+  <Project Path="NotificationPlatform.Tests/NotificationPlatform.Tests.csproj" />
+</Solution>

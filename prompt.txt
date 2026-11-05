@@ -1,0 +1,294 @@
+Act as a Principal Solution Architect and Senior .NET Engineer.
+
+Build a production-grade "Multi-Channel Notification Platform" using ASP.NET Core 8 Web API, following Clean Architecture, SOLID principles, and Enterprise Design Patterns.
+
+Project Objective:
+Create a notification system capable of sending notifications through multiple channels such as Email, SMS, Push Notifications, and future channels like WhatsApp without modifying existing business logic.
+
+====================================================
+BUSINESS REQUIREMENTS
+====================================================
+
+1. Users can submit notifications through REST API.
+
+2. Notification request contains:
+
+- NotificationId
+- Recipient
+- Subject
+- Message
+- NotificationType
+- Priority
+- CreatedDate
+
+3. System should support:
+- Email
+- SMS
+- Push Notification
+
+4. Future support:
+- WhatsApp
+- Teams Notification
+- Slack Notification
+
+5. Notification should be persisted.
+
+6. System should expose REST endpoints.
+
+7. Generate Swagger Documentation.
+
+====================================================
+ARCHITECTURE REQUIREMENTS
+====================================================
+
+Use Clean Architecture.
+
+Solution Structure:
+
+NotificationPlatform.API
+
+NotificationPlatform.Application
+
+NotificationPlatform.Domain
+
+NotificationPlatform.Infrastructure
+
+NotificationPlatform.Tests
+
+====================================================
+DOMAIN LAYER
+====================================================
+
+Create:
+
+Entities:
+- Notification
+
+Enums:
+- NotificationType
+- NotificationStatus
+
+Interfaces:
+- INotificationProvider
+- INotificationRepository
+
+Domain should have no dependency on infrastructure.
+
+====================================================
+SOLID PRINCIPLES DEMONSTRATION
+====================================================
+
+1. SRP
+Each class should have a single responsibility.
+
+2. OCP
+New notification providers should be added without modifying existing code.
+
+3. LSP
+All notification providers must be interchangeable.
+
+4. ISP
+Avoid fat interfaces.
+
+5. DIP
+Depend on abstractions and use Dependency Injection.
+
+Add comments showing where each SOLID principle is implemented.
+
+====================================================
+DESIGN PATTERNS
+====================================================
+
+Implement:
+
+1. Strategy Pattern
+
+EmailProvider
+SmsProvider
+PushProvider
+
+2. Factory Pattern
+
+NotificationProviderFactory
+
+Factory should dynamically return correct provider based on notification type.
+
+3. Repository Pattern
+
+NotificationRepository
+
+4. Dependency Injection
+
+Register all implementations through Microsoft DI Container.
+
+====================================================
+APPLICATION LAYER
+====================================================
+
+Create:
+
+Commands:
+- SendNotificationCommand
+
+Handlers:
+- SendNotificationHandler
+
+Services:
+- NotificationService
+
+Validation:
+- FluentValidation
+
+Business Flow:
+
+API
+
+→ Validator
+
+→ Application Service
+
+→ Factory
+
+→ Provider
+
+→ Repository
+
+====================================================
+INFRASTRUCTURE LAYER
+====================================================
+
+Implement:
+
+EmailProvider
+
+SmsProvider
+
+PushProvider
+
+InMemoryNotificationRepository
+
+Mock actual external providers.
+
+Do not integrate actual Twilio or SMTP initially.
+
+Use logging instead.
+
+====================================================
+WEB API LAYER
+====================================================
+
+Create Controllers:
+
+POST /api/notifications
+
+GET /api/notifications
+
+GET /api/notifications/{id}
+
+Return appropriate status codes.
+
+Implement global exception handling middleware.
+
+Use Serilog logging.
+
+Enable Swagger.
+
+====================================================
+DEPENDENCY INJECTION
+====================================================
+
+Configure all services in Program.cs.
+
+Use constructor injection everywhere.
+
+Demonstrate Dependency Inversion Principle.
+
+====================================================
+UNIT TESTING
+====================================================
+
+Use:
+
+xUnit
+
+Moq
+
+FluentAssertions
+
+Add tests for:
+
+NotificationService
+
+NotificationProviderFactory
+
+SendNotificationHandler
+
+Mock repositories and providers.
+
+Verify interactions using Moq Verify().
+
+Target minimum 80% code coverage.
+
+====================================================
+DOCUMENTATION
+====================================================
+
+Generate:
+
+README.md
+
+Include:
+
+Project Overview
+
+Architecture Diagram
+
+SOLID Principles Mapping
+
+Design Patterns Used
+
+API Endpoints
+
+How to Run
+
+How to Run Tests
+
+Future Enhancements
+
+====================================================
+BONUS ARCHITECTURE FEATURES
+====================================================
+
+Add:
+
+Background Service
+
+Queue-based Processing using Azure Service Bus abstraction
+
+Caching abstraction
+
+Health Checks
+
+API Versioning
+
+OpenTelemetry Logging
+
+Structured Logging
+
+====================================================
+DELIVERABLES
+====================================================
+
+Provide:
+
+1. Complete folder structure
+2. Full source code
+3. Architecture explanation
+4. SOLID principle explanation with code references
+5. Unit tests
+6. Sequence Diagram
+7. Class Diagram
+8. GitHub README
+9. Interview talking points explaining architectural decisions and trade-offs.
+
+Generate code incrementally starting from Domain Layer.
