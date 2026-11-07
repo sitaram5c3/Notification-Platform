@@ -7,6 +7,7 @@ namespace NotificationPlatform.Application.Services;
 
 // SRP: orchestrates notification lifecycle only.
 // DIP: depends on abstractions (repository and provider interface).
+// ISP: consumes focused contracts (INotificationRepository, INotificationProvider) instead of fat interfaces.
 public class NotificationService(
     INotificationRepository repository,
     IEnumerable<INotificationProvider> providers,
@@ -19,6 +20,8 @@ public class NotificationService(
 
         try
         {
+            // OCP: new channels can be added by implementing INotificationProvider without changing service flow.
+            // LSP: any valid INotificationProvider implementation is substitutable here.
             var provider = providers.FirstOrDefault(p => p.ChannelType == notification.NotificationType)
                 ?? throw new NotSupportedException($"Notification channel '{notification.NotificationType}' is not registered.");
 
