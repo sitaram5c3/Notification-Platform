@@ -1,4 +1,3 @@
-using Asp.Versioning;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using NotificationPlatform.Application.Commands;
@@ -8,7 +7,6 @@ using NotificationPlatform.Application.Services;
 namespace NotificationPlatform.API.Controllers;
 
 [ApiController]
-[ApiVersion("1.0")]
 [Route("api/[controller]")]
 public class NotificationsController(
     IValidator<SendNotificationCommand> validator,
